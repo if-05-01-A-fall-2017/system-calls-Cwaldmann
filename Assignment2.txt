@@ -1,0 +1,41 @@
+----------POSIX calls research----------
+
+fork: creates a new prozess by duplicating the calling process.
+	the calling prozess is the parent prozess.
+	arguments: void 
+
+stat: returns a struct with information about a filepath given.
+	arguments: const char* pathname, struct stat *buf
+
+kill:	used to send a signal to another prozess 
+	arguments: pid_t pid, int sig
+
+*mmap:	used to get memory mapping of file pages.
+	arguments: void *addr, size_t length, int prot, int flags, int fd, off_t offset
+
+chmod: used to change filemode bits.
+	arguments: const char *path, mode_t mode
+
+waitpid: this method will wait until the child prozess changes its status ( either terminated, stopped or resumed )
+	arguments: pid_t pid, int *wsstatus, int options
+
+----------System call fails----------
+
+- fork: will fail if maximum prozesses are reached or memory is full etc...
+
+- exec: will fail if the prozess image is invalid, false filename etc....
+
+- unlink: will fail if the file is already unlinked/not found or the file is used by another prozess or just not allowed to delete due its 
+	security.
+- read: will fail if file does not exist, or due to not enough premissions. or a DIR or simly an I/O error not caused by the system call 	
+	itself.
+- mount: will fail if read only DIR, corrupt files, wrong path, source already mounted and 10 other reasons.
+
+- chmod: will fail if used false filepath, false flags &-or modes
+
+- kill: will fail if invalid prozess id is used.
+
+----------Traps----------
+
+A trap is used to enter kernel mode. As you discussed on monday @assembler: the system ( kernel ) instruction is loaded and the trap is called and those loaded instructions will be done. like you go to an pharmacy, ring at the door and hand in your recipe. 
+	
